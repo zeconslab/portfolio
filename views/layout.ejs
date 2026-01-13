@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <title><%= typeof pageTitle !== 'undefined' ? pageTitle : 'Admin Panel' %></title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-[#05070a] text-slate-200 antialiased;
+                background-image: 
+                    radial-gradient(circle at 0% 0%, rgba(57, 255, 20, 0.03) 0%, transparent 40%),
+                    radial-gradient(circle at 100% 100%, rgba(11, 94, 101, 0.05) 0%, transparent 40%);
+            }
+        }
+    </style>
+    <style>
+        :root {
+            --glass-bg: rgba(26, 31, 40, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --neon-primary: #39FF14;
+            --neon-secondary: #00f2ff;
+            --deep-bg: #05070a;
+        }
+        .glass-panel {
+            backdrop-filter: blur(24px);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+        .neon-glow-primary {
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+        }
+        .neon-border-focus:focus {
+            outline: none;
+            border-color: rgba(57, 255, 20, 0.4);
+            box-shadow: 0 0 0 1px rgba(57, 255, 20, 0.4), 0 0 15px rgba(57, 255, 20, 0.1);
+        }
+        .nav-link.active-link-glow {
+            position: relative !important;
+            overflow: hidden !important;
+            background: rgba(57, 255, 20, 0.05) !important;
+            border-left: 3px solid #39FF14 !important;
+            box-shadow: inset 10px 0 20px -10px rgba(57, 255, 20, 0.2) !important;
+            border-radius: 0 0.75rem 0.75rem 0 !important;
+            color: #39FF14 !important;
+        }
+        .nav-link.active-link-glow .material-symbols-outlined,
+        .nav-link.active-link-glow span {
+            color: #39FF14 !important;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(57, 255, 20, 0.2); }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#39FF14",
+                        "cyber-blue": "#00f2ff",
+                        "surface": "#121820",
+                        "border-glass": "rgba(255, 255, 255, 0.08)",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display">
+    <!-- DEBUG: page = <%= page %> -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-72 glass-panel border-r flex flex-col justify-between shrink-0 z-20">
+            <div class="flex flex-col gap-10 p-8">
+                <div class="flex items-center gap-4">
+                    <div class="size-10 bg-gradient-to-br from-[#39FF14] to-[#00f2ff] rounded-lg flex items-center justify-center text-black shadow-[0_0_15px_rgba(57,255,20,0.3)]">
+                        <span class="material-symbols-outlined font-bold">terminal</span>
+                    </div>
+                    <div>
+                        <h1 class="font-mono font-bold text-sm tracking-widest text-white">SYSTEM_CORE</h1>
+                        <p class="text-[10px] text-primary/70 font-mono uppercase tracking-[0.2em] neon-glow-primary">Admin v4.0.1</p>
+                    </div>
+                </div>
+                <nav class="flex flex-col gap-2">
+                    <a class="nav-link flex items-center gap-4 px-4 py-3 rounded-r-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all <%= page == 'dashboard' ? 'active-link-glow text-primary' : '' %>" href="/admin">
+                        <span class="material-symbols-outlined text-xl">person_edit</span>
+                        <span class="text-sm font-medium <%= page == 'dashboard' ? 'font-bold' : '' %>">Identity Profile</span>
+                    </a>
+                    <a class="nav-link flex items-center gap-4 px-4 py-3 rounded-r-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all <%= page == 'timeline' ? 'active-link-glow text-primary' : '' %>" href="/admin/timeline">
+                        <span class="material-symbols-outlined text-xl">history_edu</span>
+                        <span class="text-sm font-medium <%= page == 'timeline' ? 'font-bold' : '' %>">Timeline Log</span>
+                    </a>
+                    <a class="nav-link flex items-center gap-4 px-4 py-3 rounded-r-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all <%= page == 'projects' ? 'active-link-glow text-primary' : '' %>" href="/admin/projects">
+                        <span class="material-symbols-outlined text-xl">code_blocks</span>
+                        <span class="text-sm font-medium <%= page == 'projects' ? 'font-bold' : '' %>">Project Matrix</span>
+                    </a>
+                    <a class="nav-link flex items-center gap-4 px-4 py-3 rounded-r-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all <%= page == 'skills' ? 'active-link-glow text-primary' : '' %>" href="/admin/skills">
+                        <span class="material-symbols-outlined text-xl">psychology</span>
+                        <span class="text-sm font-medium <%= page == 'skills' ? 'font-bold' : '' %>">Neural Stack</span>
+                    </a>
+                    <a class="nav-link flex items-center gap-4 px-4 py-3 rounded-r-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all <%= page == 'seo' ? 'active-link-glow text-primary' : '' %>" href="/admin/seo">
+                        <span class="material-symbols-outlined text-xl">travel_explore</span>
+                        <span class="text-sm font-medium <%= page == 'seo' ? 'font-bold' : '' %>">SEO Protocols</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="p-6 border-t border-white/5">
+                <button class="w-full flex items-center justify-center gap-2 bg-transparent border border-primary/30 text-primary py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-primary/10 transition-all shadow-[0_0_10px_rgba(57,255,20,0.05)]">
+                    <span class="material-symbols-outlined text-lg">rocket_launch</span>
+                    Push to Origin
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-y-auto custom-scrollbar">
+            <!-- Header -->
+            <header class="h-20 glass-panel border-b sticky top-0 z-10 px-10 flex items-center justify-between">
+                <div class="flex items-center gap-4 text-xs font-mono tracking-widest uppercase text-slate-500">
+                    <span class="hover:text-primary transition-colors cursor-pointer">Terminal</span>
+                    <span class="material-symbols-outlined text-xs">chevron_right</span>
+                    <span class="text-white neon-glow-primary">Root/Config/Portfolio</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-3 px-4 py-2 rounded-full glass-panel border-white/5">
+                        <div class="size-2 rounded-full bg-primary shadow-[0_0_8px_rgba(57,255,20,0.8)] animate-pulse"></div>
+                        <span class="text-[10px] font-mono font-bold uppercase tracking-tighter text-primary">Status: Operational</span>
+                    </div>
+                    <div class="h-6 w-px bg-white/10"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-xs font-bold text-white">Admin_User</p>
+                            <p class="text-[10px] font-mono text-slate-500 uppercase">Super_Admin</p>
+                        </div>
+                        <button id="logoutBtn" class="size-10 rounded-lg bg-gradient-to-tr from-[#121820] to-[#1e293b] border border-white/10 flex items-center justify-center overflow-hidden hover:border-red-500/40 transition-all">
+                            <span class="material-symbols-outlined text-red-400">logout</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="p-10 max-w-6xl mx-auto w-full flex flex-col gap-10">
+                <%- body %>
+            </div>
+        </main>
+    </div>
+
+    <script src="/admin.js"></script>
+</body>
+</html>
