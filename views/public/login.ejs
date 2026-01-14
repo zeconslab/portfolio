@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Admin Login</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
     <style type="text/tailwindcss">
         @layer base {
             body {
@@ -47,6 +51,21 @@
             box-shadow: 0 0 25px rgba(57, 255, 20, 0.4);
             text-shadow: 2px 0 #fff, -2px 0 #00f2ff;
         }
+        @keyframes particle-float-enhanced {
+            0% { transform: translateY(10vh) translateX(0); opacity: 0; }
+            20% { opacity: 0.5; }
+            50% { transform: translateY(-45vh) translateX(30px); opacity: 0.7; }
+            80% { opacity: 0.4; }
+            100% { transform: translateY(-110vh) translateX(-10px); opacity: 0; }
+        }
+        .particle-neon {
+            position: absolute;
+            background: var(--neon-primary);
+            box-shadow: 0 0 15px var(--neon-primary), 0 0 30px var(--neon-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
     </style>
     <script id="tailwind-config">
         tailwind.config = {
@@ -67,56 +86,88 @@
         }
     </script>
 </head>
+
 <body class="font-mono">
+    <div class="fixed inset-0 cyber-grid pointer-events-none"></div>
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="particle-neon w-[4px] h-[4px] left-[15%] bottom-[-5%]"
+            style="animation: particle-float-enhanced 12s infinite 0s;"></div>
+        <div class="particle-neon w-[2px] h-[2px] left-[40%] bottom-[-5%]"
+            style="animation: particle-float-enhanced 18s infinite 2s;"></div>
+        <div class="particle-neon w-[5px] h-[5px] left-[60%] bottom-[-5%]"
+            style="animation: particle-float-enhanced 14s infinite 4s;"></div>
+        <div class="particle-neon w-[3px] h-[3px] left-[85%] bottom-[-5%]"
+            style="animation: particle-float-enhanced 16s infinite 1s;"></div>
+        <div class="particle-neon w-[2px] h-[2px] left-[25%] bottom-[-5%]"
+            style="animation: particle-float-enhanced 20s infinite 6s;"></div>
+        <div class="particle-neon w-[4px] h-[4px] left-[75%] bottom-[-5%]"
+            style="animation: particle-float-enhanced 15s infinite 3s;"></div>
+    </div>
     <div class="fixed top-8 right-10 flex items-center gap-4 z-50">
         <div class="flex flex-col items-end">
             <div class="flex items-center gap-2">
                 <span class="size-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(57,255,20,0.8)]"></span>
-                <span class="text-[10px] font-bold tracking-[0.2em] text-primary neon-glow-text">SYSTEM_STATUS: SECURE</span>
+                <span class="text-[10px] font-bold tracking-[0.2em] text-primary neon-glow-text">SYSTEM_STATUS:
+                    SECURE</span>
             </div>
             <span class="text-[8px] text-slate-500 tracking-tighter uppercase">Uplink_Node: 0x992_V4</span>
         </div>
     </div>
     <div class="fixed inset-0 pointer-events-none opacity-20">
-        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#1a202c_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        <div
+            class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#1a202c_1px,transparent_1px)] [background-size:20px_20px]">
+        </div>
     </div>
     <main class="w-full max-w-md p-6 z-10">
         <div class="glass-card rounded-2xl p-10 relative overflow-hidden">
             <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary/40"></div>
             <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary/40"></div>
             <div class="mb-12 text-center">
-                <div class="inline-flex items-center justify-center size-14 rounded-xl glass-card border-primary/30 mb-6 group">
-                    <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">security</span>
+                <div
+                    class="inline-flex items-center justify-center size-14 rounded-xl glass-card border-primary/30 mb-6 group">
+                    <span
+                        class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">security</span>
                 </div>
-                <h1 class="text-xs font-bold tracking-[0.5em] text-primary/80 neon-glow-text mb-2">AUTHENTICATION_REQUIRED</h1>
+                <h1 class="text-xs font-bold tracking-[0.5em] text-primary/80 neon-glow-text mb-2">
+                    AUTHENTICATION_REQUIRED</h1>
                 <div class="h-px w-24 bg-gradient-to-r from-transparent via-primary/40 to-transparent mx-auto"></div>
             </div>
             <form id="loginForm" class="space-y-8">
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400 pl-1">USER_IDENTIFIER</label>
+                    <label
+                        class="text-[10px] font-bold uppercase tracking-widest text-slate-400 pl-1">USER_IDENTIFIER</label>
                     <div class="terminal-input group flex items-center px-4 py-3.5">
                         <span class="text-primary font-bold mr-3 text-sm">{"&gt;"}</span>
-                        <input class="bg-transparent border-none focus:ring-0 text-white font-mono text-sm w-full placeholder:text-slate-600" placeholder="Root_Admin" type="text" id="email" value="admin@demo.com" />
+                        <input
+                            class="bg-transparent border-none focus:ring-0 text-white font-mono text-sm w-full placeholder:text-slate-600"
+                            placeholder="Root_Admin" type="text" id="email" value="admin@demo.com" />
                     </div>
                 </div>
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400 pl-1">ACCESS_KEY</label>
+                    <label
+                        class="text-[10px] font-bold uppercase tracking-widest text-slate-400 pl-1">ACCESS_KEY</label>
                     <div class="terminal-input group flex items-center px-4 py-3.5">
                         <span class="text-primary font-bold mr-3 text-sm">{"&gt;"}</span>
-                        <input class="bg-transparent border-none focus:ring-0 text-white font-mono text-sm w-full placeholder:text-slate-600" placeholder="••••••••••••" type="password" id="password" value="123456" />
+                        <input
+                            class="bg-transparent border-none focus:ring-0 text-white font-mono text-sm w-full placeholder:text-slate-600"
+                            placeholder="••••••••••••" type="password" id="password" value="123456" />
                     </div>
                 </div>
-                
-                <p id="errorMessage" style="display: none; color: #ff3366; font-size: 11px; text-align: center; padding: 12px; background: rgba(255, 51, 102, 0.15); border: 1px solid rgba(255, 51, 102, 0.5); border-radius: 8px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;"></p>
-                
+
+                <p id="errorMessage"
+                    style="display: none; color: #ff3366; font-size: 11px; text-align: center; padding: 12px; background: rgba(255, 51, 102, 0.15); border: 1px solid rgba(255, 51, 102, 0.5); border-radius: 8px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;">
+                </p>
+
                 <div class="pt-4">
-                    <button type="submit" class="glitch-btn w-full py-5 rounded-lg text-sm flex items-center justify-center gap-3">
+                    <button type="submit"
+                        class="glitch-btn w-full py-5 rounded-lg text-sm flex items-center justify-center gap-3">
                         <span class="material-symbols-outlined text-lg">login</span>
                         INITIALIZE_SESSION
                     </button>
                 </div>
             </form>
-            <div class="mt-12 flex justify-between items-end border-t border-white/5 pt-6 font-mono text-[9px] text-slate-500 tracking-widest">
+            <div
+                class="mt-12 flex justify-between items-end border-t border-white/5 pt-6 font-mono text-[9px] text-slate-500 tracking-widest">
                 <div class="flex flex-col gap-1">
                     <span>ENCRYPTION: AES_256_GCM</span>
                     <span>PROTOCOL: WSS_V2</span>
@@ -126,12 +177,15 @@
                 </div>
             </div>
         </div>
-        <p class="mt-8 text-center text-[10px] text-slate-600 tracking-widest uppercase cursor-pointer hover:text-primary/60 transition-colors">
+        <p
+            class="mt-8 text-center text-[10px] text-slate-600 tracking-widest uppercase cursor-pointer hover:text-primary/60 transition-colors">
             Request_Access_Protocol // Forgot_Key
         </p>
     </main>
-    <div class="fixed inset-0 pointer-events-none mix-blend-overlay opacity-[0.03]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhq0A3xQ_IgtfTqEUtPfsO1441LX8CBwLfwllhGZ7y_eSpedv3cG3PjSa7ZlMKmbSqANq5oU62g93Cyxb15WvKMIai-Zeo6l4vcjJIwqx3v_CfDCJUHpR_VILljIDwftxWKLFFMH_tok5EF9HAj7wrldLrOtKl1q8p_sFQMX9N9NQTDpNbGBbUvw7NQ3UgsvnElc5MOmRiZ9n1NHQGcHQIqwCNL2SWdnlxbwn8IKQTWV0qNF--MJgRBJsRUfcnW-2uV5jG52IwK_0')"></div>
-    
+    <div class="fixed inset-0 pointer-events-none mix-blend-overlay opacity-[0.03]"
+        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhq0A3xQ_IgtfTqEUtPfsO1441LX8CBwLfwllhGZ7y_eSpedv3cG3PjSa7ZlMKmbSqANq5oU62g93Cyxb15WvKMIai-Zeo6l4vcjJIwqx3v_CfDCJUHpR_VILljIDwftxWKLFFMH_tok5EF9HAj7wrldLrOtKl1q8p_sFQMX9N9NQTDpNbGBbUvw7NQ3UgsvnElc5MOmRiZ9n1NHQGcHQIqwCNL2SWdnlxbwn8IKQTWV0qNF--MJgRBJsRUfcnW-2uV5jG52IwK_0')">
+    </div>
+
     <script>
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -168,4 +222,5 @@
         });
     </script>
 </body>
+
 </html>

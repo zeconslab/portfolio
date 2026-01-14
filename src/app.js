@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
+const cookieParser = require('cookie-parser');
 
 // Inicialización
 const app = express();
@@ -13,6 +14,7 @@ app.set('layout', 'layout'); // Usar layout.ejs por defecto
 
 // Middlewares
 app.use(express.json());
+app.use(cookieParser());
 
 // Archivos estáticos
 app.use(express.static(path.join(__dirname, '../public'))); // Servir admin.js y otros archivos estáticos
@@ -22,31 +24,17 @@ app.use('/css', express.static(path.join(__dirname, '../../frontend/src/css')));
 const authRoutes = require('./routes/auth.routes');
 app.use('/api/auth', authRoutes);
 
+// Rutas públicas y admin (vistas)
+const publicRoutes = require('./routes/public.routes');
+const adminRoutes = require('./routes/admin.routes');
+
+app.use('/', publicRoutes);
+app.use('/admin', adminRoutes);
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', backend: true });
 });
 
 // Rutas específicas
-app.get('/login', (req, res) => {
-  res.render('login', { layout: false }); // Sin layout para login
-});
-app.get('/admin', (req, res) => {
-  res.render('dashboard', { page: 'dashboard' });
-});
-
-app.get('/admin/projects', (req, res) => {
-  res.render('projects', { page: 'projects' });
-});
-
-app.get('/admin/timeline', (req, res) => {
-  res.render('timeline', { page: 'timeline' });
-});
-
-app.get('/admin/skills', (req, res) => {
-  res.render('skills', { page: 'skills' });
-});
-
-app.get('/admin/seo', (req, res) => {
-  res.render('seo', { page: 'seo' });
-});
+// Las rutas de login y admin ahora están en routers dedicados
 module.exports = app;

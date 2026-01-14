@@ -22,11 +22,17 @@ router.post('/login', async (req, res) => {
     return res.status(401).json({ message: 'Credenciales inválidas' });
   }
 
+  // Firmar token incluyendo role para soporte de requireAdmin
   const token = jwt.sign(
-    { email },
+    { email, role: 'admin' },
     process.env.JWT_SECRET || 'secret-key-demo',
     { expiresIn: '1h' }
   );
+
+  // Opcional: enviar cookie para facilitar consumo desde vistas
+  if (req.cookies) {
+    res.cookie('authToken', token, { httpOnly: true, maxAge: 3600000 });
+  }
 
   res.json({ token });
 });

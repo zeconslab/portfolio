@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Si no hay token, redirigir al login
     if (!token) {
-        window.location.href = '/login';
+        window.location.href = '/';
         return;
     }
 
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
             localStorage.removeItem('authToken');
-            window.location.href = '/login';
+            window.location.href = '/';
         });
     }
 });
