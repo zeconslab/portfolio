@@ -49,8 +49,8 @@
           .border-white\/10 { border-color: rgba(var(--bg-white-rgb), .5) !important; }
           .border-white\/5 { border-color: rgba(var(--bg-white-rgb), .05) !important; }
           .bg-black { background-color: var(--bg-black) !important; }
-                    .bg-black\/40 { background-color: rgba(var(--bg-black-rgb), .4) !important; }
-                    .bg-black\/5 { background-color: rgba(var(--bg-black-rgb), .05) !important; }
+            .bg-black\/40 { background-color: rgba(var(--bg-black-rgb), .4) !important; }
+            .bg-black\/5 { background-color: rgba(var(--bg-black-rgb), .05) !important; }
         /* Map a few commonly used utility classes to CSS variables
            so runtime palette changes affect them. Add more as needed. */
         .text-cyan-neon { color: var(--neon-cyan) !important; }
@@ -171,11 +171,11 @@
                     </nav>
                 </div>
                 <div class="flex flex-col gap-6">
-                    <div class="flex items-center justify-between px-4 py-2 bg-black/40 rounded-full border border-white/5">
+                    <div
+                        class="flex items-center justify-between px-4 py-2 bg-black/40 rounded-full border border-white/5">
                         <span class="material-symbols-outlined text-sm text-cyan-neon">dark_mode</span>
                         <div id="theme-toggle" role="button" aria-pressed="true" tabindex="0"
-                            class="w-10 h-5 bg-cyan-neon/20 rounded-full relative cursor-pointer"
-                            data-theme="dark">
+                            class="w-10 h-5 bg-cyan-neon/20 rounded-full relative cursor-pointer" data-theme="dark">
                             <div id="theme-toggle-knob"
                                 class="absolute top-1 left-1 w-3 h-3 bg-cyan-neon rounded-full shadow-[0_0_8px_rgba(0,242,255,0.8)] transition-all">
                             </div>
@@ -486,4 +486,5 @@
     </div>
     <script src="../main.js"></script>
 </body>
+
 </html>

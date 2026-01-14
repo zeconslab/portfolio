@@ -54,6 +54,84 @@ document.addEventListener('DOMContentLoaded', () => {
 		Object.entries(p).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
 	}
 
+	function updateGroupHoverTextWhite(mode) {
+		const els = document.querySelectorAll('.group-hover\\:text-white');
+		els.forEach(el => {
+			if (mode === 'light') {
+				// Replace the hover text utility with a hover background in light mode.
+				if (el.classList.contains('group-hover:text-white')) {
+					el.classList.remove('group-hover:text-white');
+					el.classList.add('group-hover:text-slate-700');
+					el.setAttribute('data-removed-group-hover-text-white', 'true');
+					el.setAttribute('data-added-group-hover-text-slate-700', 'true');
+				}
+				// Also remove any forced `text-white` left over.
+				el.classList.remove('text-white');
+			} else {
+				// Restore the original class when switching back to dark
+				if (el.getAttribute('data-removed-group-hover-text-white') === 'true') {
+					el.classList.add('group-hover:text-white');
+					el.removeAttribute('data-removed-group-hover-text-white');
+				}
+				if (el.getAttribute('data-added-group-hover-text-slate-700') === 'true') {
+					el.classList.remove('group-hover:text-slate-700');
+					el.removeAttribute('data-added-group-hover-text-slate-700');
+				}
+			}
+		});
+	}
+
+	function updateHoverBgWhite(mode) {
+		// Now operate on hover text color utilities instead of background.
+		const els = document.querySelectorAll('.hover\\:text-white');
+		els.forEach(el => {
+			if (mode === 'light') {
+				if (el.classList.contains('hover:text-white')) {
+					el.classList.remove('hover:text:white');
+					// remove incorrect class above and add correct removal if present
+				}
+				if (el.classList.contains('hover:text-white')) {
+					el.classList.remove('hover:text-white');
+				}
+				// Add the light-mode hover text color
+				el.classList.add('hover:text-cyan-neon');
+				el.setAttribute('data-removed-hover-text-white', 'true');
+				el.setAttribute('data-added-hover-text-cyan-neon', 'true');
+			} else {
+				// Restore original hover text class when returning to dark
+				if (el.getAttribute('data-removed-hover-text-white') === 'true') {
+					el.classList.add('hover:text-white');
+					el.removeAttribute('data-removed-hover-text-white');
+				}
+				if (el.getAttribute('data-added-hover-text-cyan-neon') === 'true') {
+					el.classList.remove('hover:text-cyan-neon');
+					el.removeAttribute('data-added-hover-text-cyan-neon');
+				}
+			}
+		});
+	}
+
+	function updateToggleIcons(mode) {
+		if (!toggle) return;
+		const parent = toggle.parentElement;
+		if (!parent) return;
+		const spans = parent.querySelectorAll('span.material-symbols-outlined');
+		if (spans.length < 2) return;
+		const darkIcon = spans[0];
+		const lightIcon = spans[1];
+		if (mode === 'dark') {
+			darkIcon.classList.add('text-cyan-neon');
+			darkIcon.classList.remove('text-slate-600');
+			lightIcon.classList.add('text-slate-600');
+			lightIcon.classList.remove('text-cyan-neon');
+		} else {
+			darkIcon.classList.remove('text-cyan-neon');
+			darkIcon.classList.add('text-slate-600');
+			lightIcon.classList.remove('text-slate-600');
+			lightIcon.classList.add('text-cyan-neon');
+		}
+	}
+
 	function setTheme(mode) {
 		if (mode === 'dark') {
 			html.classList.add('dark');
@@ -70,6 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			knob.classList.add('right-1');
 			applyPalette(palettes.light);
 		}
+		// Update hover text handling (preserve in dark, clean in light)
+		updateGroupHoverTextWhite(mode);
+		updateHoverBgWhite(mode);
+		updateToggleIcons(mode);
+
 		localStorage.setItem('site-theme', mode);
 	}
 
