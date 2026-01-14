@@ -175,6 +175,25 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
+	// Enable smooth scrolling for same-page anchors
+	function enableSmoothScrolling() {
+		document.documentElement.style.scrollBehavior = 'smooth';
+		document.querySelectorAll('a[href^="#"]').forEach(a => {
+			const href = a.getAttribute('href');
+			if (!href || href === '#') return;
+			a.addEventListener('click', (e) => {
+				const target = document.querySelector(href);
+				if (!target) return; // let normal navigation if not found
+				e.preventDefault();
+				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				// update URL without jumping
+				history.replaceState(null, '', href);
+			});
+		});
+	}
+
+	enableSmoothScrolling();
+
 	// Public API: allow adding/applying palettes at runtime
 	window.ThemePalettes = {
 		add(name, obj) { palettes[name] = obj; },
